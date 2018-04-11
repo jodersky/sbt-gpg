@@ -1,0 +1,19 @@
+language: scala
+
+jdk:
+  - oraclejdk8
+
+env:
+  global:
+    - secure: "tYdkG/dWAdW2/ZqbWKys4mOBeLRan9AUTndc9nXcuVfG0M4WK+jef1LUSMJtt07g0vvzk9K3nMyJaOqoBBk0ff1mHQEZrF7unCQJD92OokzyesZnyV8fEQuxBQ7n8SyWEFPSZN9VRKJ69J5G81ii06QaZMMvg27NevNZi8ooFHGx8uJMXmYsKdNO+vP0DibZ4oOTwrR5WpYeVQXxZA9URZ6E79rXT1A2CGwxt0AzCyG8I7DetwgI5TdPyUrYuFV56aG8o8S9URmXuRAdvvsoomZTf7iDxEKFTlgLosEr/n4cC7dyKR0FEsDOkghk4Ozf7OtpUB2g+WRO1Om3b/ncu3H2b/J4d91WQEkbwTvhRzDIhwdcx36RVzUJyW3ekNMzZoAg1ZCgQt+PACgQjgEJhtIAFAXlaYlUai5jnnfCTAXOnguN89EqdTAgrl7vp7XS78uW4ISg2k7KelzzYADBu2LsWMu99ViyCkzMQq6t1nCUI8WSLga5DdYCGjYtitlGfU3RSvhcQkea211wvV4xajxuLMV3VD8/LoREaM2V2T7C8vc4Sxectsy2WDRWj3BJ/DjlSPstFl9nhtiC+W73NpsZox9jaXrR5aWatPrA5uOG/nHSZ+UYbwuOkvlSyxhD2u2C6TSjBzke0uOMxtulZ/BPiBC6MNznjctAgiG3V5g="
+
+script: .ci/build
+
+cache:
+  directories:
+    - "$HOME/.ivy2/cache"
+    - "$HOME/.sbt/boot/"
+before_cache:
+  - find $HOME/.ivy2/cache/io.crashbox -depth -name "sbt-gpg*" -exec rm -r {} \;
+  - find $HOME/.ivy2 -name "ivydata-*.properties" -delete
+  - find $HOME/.sbt -name "*.lock" -delete
