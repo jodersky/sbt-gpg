@@ -37,17 +37,20 @@ object SbtGpg extends AutoPlugin {
       val log = streams.value.log
       val arts: Map[Artifact, File] = packagedArtifacts.value
       var failed = false
-      arts.map {
+      arts.flatMap {
         case (art, file) if !failed =>
           gpg.value.sign(file) match {
             case Some(signed) =>
-              art.withExtension(art.extension + ".asc") -> signed
+              Map(
+                art -> file,
+                art.withExtension(art.extension + ".asc") -> signed
+              )
             case None =>
               log.warn("GPG reported an error. Artifacts won't be signed.")
               failed = true
-              art -> file
+              Map(art -> file)
           }
-        case (art, file) => art -> file
+        case (art, file) => Map(art -> file)
       }
     }
   )
