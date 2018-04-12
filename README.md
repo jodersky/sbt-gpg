@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/jodersky/sbt-gpg.svg?branch=master)](https://travis-ci.org/jodersky/sbt-gpg)
+[![Scaladex](https://index.scala-lang.org/jodersky/sbt-gpg/latest.svg)](https://index.scala-lang.org/jodersky/sbt-gpg)
+
 # sbt-gpg
 
 Simple and secure artifact signing for sbt.
