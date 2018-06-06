@@ -11,7 +11,7 @@ unobtrusive. It is guided by two core ideas:
 1. easy configuration with sane defaults
 2. use of standard cryptography tools (gpg)
 
-The motivation is that these priniciple are both essential in
+The motivation is that these principles are both essential for
 promoting secure builds.
 
 ## Highlights
@@ -48,8 +48,12 @@ Copy the above snippet to an sbt configuration file. E.g.
 - `project/plugins.sbt` to enable the plugin on a per-project basis
 - `~/.sbt/1.0/plugins/gpg.sbt` to enable the plugin globally
 
-The autoplugin "SbtGpg" will be enabled and modify the `publish` and
-`publishLocal` tasks to include signatures of all published artifacts.
+That's it! The autoplugin "SbtGpg" will now be enabled for the given
+project(s). It will modify the `publish` and `publishLocal` tasks to
+always include signatures of all published artifacts.
+
+The default configuration will pick up local GPG settings. See the
+next section to find out how to customize the plugin.
 
 ## Configuration
 
@@ -62,13 +66,14 @@ specific key can be used by setting sbt `Credentials` for the host
 credentials += Credentials(
   "GnuPG Key ID",
   "gpg",
-  "4E7DA7B5A0F86992D6EB3F514601878662E33372",
-  "ignored"
+  "4E7DA7B5A0F86992D6EB3F514601878662E33372", // key identifier
+  "ignored" // passwords are supplied by pinentry
 )
 ```
 
-The user name (3rd field) will determine the key to use and can be any
-valid key id, fingerprint, email or user accepted by gpg.
+The user name (3rd field, "key identifier" in the snippet above) will
+determine the key to use and can be any valid key id, fingerprint,
+email or user accepted by GPG.
 
 ### Other settings
 Check out the [autoplugin definition](src/main/scala/SbtGpg.scala) for
