@@ -3,7 +3,10 @@ set -o errexit
 set -o nounset
 set -o verbose
 
-sbt test
+sbt \
+    scalafmtCheck \
+    test \
+    scripted
 
 # Automatic publishing for tags that start with `v<digit>`
 if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_TAG" =~ ^v[0-9].* ]]; then
