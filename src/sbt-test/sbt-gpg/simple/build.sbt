@@ -9,7 +9,7 @@ lazy val root = project
       Credentials(
         "GnuPG Key ID",
         "gpg",
-        "AF19 CAC5 0D55 E6AE E0D1  F28E F05C 07EE CC58 F7C3",
+        "764D 70D5 5506 DB6F 0D3C  F3D3 3665 C9FC E716 EC52",
         "ignored"
       )
     }
