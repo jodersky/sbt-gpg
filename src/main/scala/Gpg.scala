@@ -5,19 +5,22 @@ import java.io.File
 import scala.util.control.NonFatal
 import sys.process._
 
-class Gpg(
-    command: String,
-    options: Seq[String] = Seq.empty,
-    keyId: Option[String] = None)(log: String => Unit = System.err.println) {
+class Gpg(command: String,
+          options: Seq[String] = Seq.empty,
+          keyId: Option[String] = None)(
+    info: String => Unit = System.out.println,
+    warn: String => Unit = System.err.println) {
+
+  private val logger = ProcessLogger(info, info) // gpg uses stderr for everything; redirect to info
 
   def run(params: String*): Int =
     try {
       val idOption = keyId.toSeq.flatMap(id => Seq("--local-user", id))
-      val process = Process(command, options ++ idOption ++ params).run()
+      val process = Process(command, options ++ idOption ++ params).run(logger)
       process.exitValue()
     } catch {
       case NonFatal(ex) =>
-        log(ex.getMessage)
+        warn(ex.getMessage)
         127
     }
 

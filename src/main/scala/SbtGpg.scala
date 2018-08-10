@@ -65,7 +65,8 @@ object SbtGpg extends AutoPlugin {
     gpgKey := Credentials.forHost(credentials.value, "gpg").map(_.userName),
     gpg := {
       val log = streams.value.log
-      new Gpg(gpgCommand.value, gpgOptions.value, gpgKey.value)(log.warn(_))
+      new Gpg(gpgCommand.value, gpgOptions.value, gpgKey.value)(log.info(_),
+                                                                log.warn(_))
     }
   )
 
