@@ -17,10 +17,10 @@ promoting secure builds.
 ## Highlights
 
 - Uses the system command `gpg` to do all operations. *This enables
-  advanced features such as use of smartcards or cutting-edge
+  advanced features such as use of smartcards, key splitting, or cutting-edge
   ciphers.*
 
-- Hooks into the `publish` and `publishLocal` tasks. *All artrifacts
+- Hooks into the `publish` and `publishLocal` tasks. *All artifacts
   will be signed; there is no need to run a separate `publishSigned`
   task.*
 
@@ -28,9 +28,9 @@ promoting secure builds.
   `credentials` mechanism, thus enabling global configuration without
   the need of adding a global plugin.*
 
-- Works out-of-the-box. *Publishing falls back to unsigned artifacts
+- Works out-of-the-box. *`publishLocal` falls back to unsigned artifacts
   in case key material cannot be found, after emitting an explicit
-  warning.*
+  warning. `publish` will fail the build by default if signing fails to avoid accidentally publishing unsigned artifacts, though you can override this with a setting.*
   
 ## Requirements
 
@@ -40,13 +40,13 @@ promoting secure builds.
   functionality provided by this plugin)
 
 ## Getting started
-```scala
+```sbt
 addSbtPlugin("io.crashbox" % "sbt-gpg" % "<latest_tag>")
 ```
 Copy the above snippet to an sbt configuration file. E.g.
 
 - `project/plugins.sbt` to enable the plugin on a per-project basis
-- `~/.sbt/1.0/plugins/gpg.sbt` to enable the plugin globally
+- `~/.sbt/1.0/plugins/gpg.sbt` to enable the plugin globally (not recommended)
 
 That's it! The autoplugin "SbtGpg" will now be enabled for the given
 project(s). It will modify the `publish` and `publishLocal` tasks to
@@ -62,7 +62,7 @@ By default, all signing operations will use `gpg`'s default key. A
 specific key can be used by setting sbt `Credentials` for the host
 "gpg".
 
-```scala
+```sbt
 credentials += Credentials(
   "GnuPG Key ID",
   "gpg",
