@@ -17,7 +17,7 @@ lazy val root = project
   .settings(
     TaskKey[Unit]("check") := {
       val artifacts: Map[Artifact, java.io.File] =
-        packagedArtifacts.value
+        (publish / packagedArtifacts).value
 
       // check that every artifact is signed and that the actual signature file
       // exists
