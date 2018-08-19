@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/jodersky/sbt-gpg.svg?branch=master)](https://travis-ci.org/jodersky/sbt-gpg)
-[![Scaladex](https://index.scala-lang.org/jodersky/sbt-gpg/latest.svg)](https://index.scala-lang.org/jodersky/sbt-gpg)
 
 # sbt-gpg
 
@@ -40,6 +39,7 @@ promoting secure builds.
   functionality provided by this plugin)
 
 ## Getting started
+Latest available tag: [![Scaladex](https://index.scala-lang.org/jodersky/sbt-gpg/latest.svg)](https://index.scala-lang.org/jodersky/sbt-gpg)
 ```sbt
 addSbtPlugin("io.crashbox" % "sbt-gpg" % "<latest_tag>")
 ```
