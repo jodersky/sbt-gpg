@@ -67,7 +67,7 @@ credentials += Credentials(
   "GnuPG Key ID",
   "gpg",
   "4E7DA7B5A0F86992D6EB3F514601878662E33372", // key identifier
-  "ignored" // passwords are supplied by pinentry
+  "ignored" // this field is ignored; passwords are supplied by pinentry
 )
 ```
 
