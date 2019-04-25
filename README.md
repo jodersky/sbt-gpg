@@ -93,17 +93,21 @@ It is very common to configure your CI server (Travis or otherwise) to perform t
 
 This scheme works well when SBT manages signing key passwords and decryption (as in sbt-pgp). It works quite poorly when securely delegating to `pinentry`, as is the case with this plugin.
 
-The solution is to *not* password-protect the CI signing key and instead encrypt it explicitly using `openssl`. To start with, you should have your CI signing key in your local GPG keyring. Let's assume this key has a signature of `1234ABCD`. Run the following commands within your project root:
+The solution is to *not* password-protect the CI signing key and instead encrypt it explicitly using `openssl`.
+
+To generate a new key without passphrase protection, simply press Enter when prompted for the passphrase and select the option "Continue without passphrase protection".
+
+Next, you should have your CI signing key in your local GPG keyring. Let's assume this key has an ID of `1234ABCD`. Run the following commands within your project root:
 
 ```bash
 $ gpg --export-secret-keys -a 1234ABCD > key.asc
-$ travis encrypt_file key.asc --add
+$ travis encrypt-file key.asc --add
 $ rm key.asc
 $ git add key.asc.enc
 $ git commit
 ```
 
-Replace `travis encrypt_file` with whatever mechanism is required to securely encrypt files for your CI solution. You may omit the `--add` switch and manually modify your `.travis.yml` if you prefer. Travis' file encryption documentation is [here](https://docs.travis-ci.com/user/encrypting-files/).
+Replace [`travis encrypt-file`](https://github.com/travis-ci/travis.rb#encrypt-file) with whatever mechanism is required to securely encrypt files for your CI solution. You may omit the `--add` switch and manually modify your `.travis.yml` if you prefer. Travis' file encryption documentation is [here](https://docs.travis-ci.com/user/encrypting-files/).
 
 These steps handle securely materializing a plain-text (*not* password protected!) secret key on your CI server. The only remaining task is to make it available to `gpg` on your CI so that it can be picked up by sbt-gpg. If using Travis, add the following to your `.travis.yml`:
 
