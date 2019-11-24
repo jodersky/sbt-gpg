@@ -1,3 +1,7 @@
+# Version 0.2.1
+
+- Bump sbt version and bootstrap version
+
 # Version 0.2.0
 
 - Change behavior of missing credentials: warn when publising locally
