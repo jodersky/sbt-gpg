@@ -50,4 +50,7 @@ ThisBuild / githubWorkflowPublishPreamble ++= Seq(
     name = Some("Unlock publication configuration")))
 
 ThisBuild / githubWorkflowPublish := Seq(
-  WorkflowStep.Sbt(List("publish", "sonatypeRelease"), name = Some("Release")))
+  WorkflowStep.Sbt(
+    List("publish", "sonatypeRelease"),
+    name = Some("Release"),
+    env = Map("SONATYPE_PASS" -> "${{ secrets.SONATYPE_PASS }}")))

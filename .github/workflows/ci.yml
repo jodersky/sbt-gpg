@@ -121,4 +121,6 @@ jobs:
         run: mv sonatype.proto-sbt sonatype.sbt
 
       - name: Release
+        env:
+          SONATYPE_PASS: ${{ secrets.SONATYPE_PASS }}
         run: sbt ++${{ matrix.scala }} publish sonatypeRelease
