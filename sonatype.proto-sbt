@@ -1,11 +1,4 @@
 credentials in Global += Credentials(
-  "GnuPG Key ID",
-  "gpg",
-  "DC6A9A5E884B2D680E080467E107A4A6CF561C67",
-  "ignored"
-)
-
-credentials in Global += Credentials(
   "Sonatype Nexus Repository Manager",
   "oss.sonatype.org",
   "8VNUX6+2",
