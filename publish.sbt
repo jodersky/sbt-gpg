@@ -7,6 +7,8 @@ ThisBuild / homepage := Some(url("https://github.com/jodersky/sbt-gpg"))
 
 ThisBuild / publishTo := sonatypePublishToBundle.value
 
+ThisBuild / versionScheme := Some("early-semver")
+
 ThisBuild / scmInfo := Some(
   ScmInfo(
     url("https://github.com/jodersky/sbt-gpg"),
