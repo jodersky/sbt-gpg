@@ -45,5 +45,5 @@ class Gpg(command: String,
 }
 
 object Gpg {
-  private val gate = new Semaphore(1)   // TODO tune this better (and maybe make it configurable by settings)
+  private val gate = new Semaphore(1) // TODO tune this better (and maybe make it configurable by settings)
 }
