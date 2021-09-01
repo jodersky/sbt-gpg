@@ -1,6 +1,7 @@
 package io.crashbox.gpg
 
 import java.io.File
+import java.util.concurrent.Semaphore
 
 import scala.util.control.NonFatal
 import sys.process._
@@ -25,15 +26,24 @@ class Gpg(command: String,
     }
 
   def sign(file: File): Option[File] = {
-    val out = new File(file.getAbsolutePath + ".asc")
-    run("--armor",
-        "--output",
-        out.getAbsolutePath,
-        "--detach-sign",
-        file.getAbsolutePath) match {
-      case 0 => Some(out)
-      case _ => None
+    Gpg.gate.acquire()
+    try {
+      val out = new File(file.getAbsolutePath + ".asc")
+      run("--armor",
+          "--output",
+          out.getAbsolutePath,
+          "--detach-sign",
+          file.getAbsolutePath) match {
+        case 0 => Some(out)
+        case _ => None
+      }
+    } finally {
+      Gpg.gate.release()
     }
   }
 
+}
+
+object Gpg {
+  private val gate = new Semaphore(1)   // TODO tune this better (and maybe make it configurable by settings)
 }
