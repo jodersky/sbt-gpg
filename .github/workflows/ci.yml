@@ -119,4 +119,4 @@ jobs:
       - name: Release
         env:
           SONATYPE_PASS: ${{ secrets.SONATYPE_PASS }}
-        run: sbt ++${{ matrix.scala }} publish sonatypeRelease
+        run: sbt ++${{ matrix.scala }} publish sonatypeBundleRelease

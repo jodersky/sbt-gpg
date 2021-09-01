@@ -5,12 +5,7 @@ ThisBuild / licenses := Seq(
 
 ThisBuild / homepage := Some(url("https://github.com/jodersky/sbt-gpg"))
 
-ThisBuild / publishTo := Some(
-  if (isSnapshot.value)
-    Opts.resolver.sonatypeSnapshots
-  else
-    Opts.resolver.sonatypeStaging
-)
+ThisBuild / publishTo := sonatypePublishToBundle.value
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
@@ -45,6 +40,6 @@ ThisBuild / githubWorkflowPublishPreamble ++= Seq(
 
 ThisBuild / githubWorkflowPublish := Seq(
   WorkflowStep.Sbt(
-    List("publish", "sonatypeRelease"),
+    List("publish", "sonatypeBundleRelease"),
     name = Some("Release"),
     env = Map("SONATYPE_PASS" -> "${{ secrets.SONATYPE_PASS }}")))
