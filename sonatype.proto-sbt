@@ -1,0 +1,6 @@
+credentials in Global += Credentials(
+  "Sonatype Nexus Repository Manager",
+  "oss.sonatype.org",
+  "8VNUX6+2",
+  sys.env("SONATYPE_PASS")
+)
