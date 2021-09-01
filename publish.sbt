@@ -35,7 +35,7 @@ ThisBuild / githubWorkflowPublishTargetBranches :=
 
 ThisBuild / githubWorkflowPublishPreamble ++= Seq(
   WorkflowStep.Run(
-    List("echo $GPG_SECRET_KEY | gpg --import"),
+    List("echo \"$GPG_SECRET_KEY\" | gpg --import"),
     name = Some("Import private key"),
     env = Map("GPG_SECRET_KEY" -> "${{ secrets.GPG_SECRET_KEY }}")),
 

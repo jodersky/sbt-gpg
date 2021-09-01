@@ -111,7 +111,7 @@ jobs:
       - name: Import private key
         env:
           GPG_SECRET_KEY: ${{ secrets.GPG_SECRET_KEY }}
-        run: echo $GPG_SECRET_KEY | gpg --import
+        run: echo "$GPG_SECRET_KEY" | gpg --import
 
       - name: Unlock publication configuration
         run: mv sonatype.proto-sbt sonatype.sbt
