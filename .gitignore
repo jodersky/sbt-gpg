@@ -1,2 +1,3 @@
 target/
 .bsp/
+sonatype.sbt
